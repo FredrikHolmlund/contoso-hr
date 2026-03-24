@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contoso – Medarbetarportal</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300&family=DM+Serif+Display&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #f5f3ee;
+      --surface: #ffffff;
+      --ink: #1a1a18;
+      --ink-muted: #6b6b63;
+      --accent: #c84b2f;
+      --accent-light: #f5e8e4;
+      --border: #e2dfd8;
+      --sidebar: #1e1e1c;
+      --sidebar-text: #e8e6e0;
+      --sidebar-muted: #888880;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      min-height: 100vh;
+      display: flex;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 240px;
+      min-height: 100vh;
+      background: var(--sidebar);
+      padding: 32px 0;
+      position: fixed;
+      top: 0; left: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sidebar-logo {
+      padding: 0 28px 32px;
+      border-bottom: 1px solid #333330;
+    }
+
+    .sidebar-logo .company {
+      font-family: 'DM Serif Display', serif;
+      font-size: 22px;
+      color: #ffffff;
+      letter-spacing: -0.3px;
+    }
+
+    .sidebar-logo .tagline {
+      font-size: 11px;
+      color: var(--sidebar-muted);
+      margin-top: 3px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .sidebar-nav {
+      padding: 24px 0;
+      flex: 1;
+    }
+
+    .nav-section-label {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      color: var(--sidebar-muted);
+      padding: 0 28px;
+      margin-bottom: 8px;
+      margin-top: 20px;
+    }
+
+    .nav-section-label:first-child { margin-top: 0; }
+
+    .nav-link {
+      display: block;
+      padding: 9px 28px;
+      color: var(--sidebar-text);
+      text-decoration: none;
+      font-size: 13.5px;
+      font-weight: 400;
+      transition: background 0.15s;
+      opacity: 0.8;
+    }
+
+    .nav-link:hover { background: #2a2a28; opacity: 1; }
+    .nav-link.active { background: #2a2a28; opacity: 1; color: #fff; border-left: 2px solid var(--accent); }
+
+    .sidebar-footer {
+      padding: 20px 28px;
+      border-top: 1px solid #333330;
+      font-size: 12px;
+      color: var(--sidebar-muted);
+    }
+
+    /* Main */
+    .main {
+      margin-left: 240px;
+      flex: 1;
+      padding: 48px 56px;
+      max-width: 960px;
+    }
+
+    .page-header {
+      margin-bottom: 40px;
+      padding-bottom: 28px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .breadcrumb {
+      font-size: 12px;
+      color: var(--ink-muted);
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+
+    h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 36px;
+      font-weight: 400;
+      color: var(--ink);
+      letter-spacing: -0.5px;
+      line-height: 1.15;
+    }
+
+    .page-intro {
+      margin-top: 12px;
+      font-size: 15px;
+      color: var(--ink-muted);
+      font-weight: 300;
+      line-height: 1.6;
+      max-width: 580px;
+    }
+
+    /* Cards grid */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 48px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 22px 24px;
+      transition: box-shadow 0.2s;
+    }
+
+    .card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.07); }
+
+    .card-icon {
+      width: 36px;
+      height: 36px;
+      background: var(--accent-light);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 14px;
+      font-size: 17px;
+    }
+
+    .card h3 {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: var(--ink);
+    }
+
+    .card p {
+      font-size: 13px;
+      color: var(--ink-muted);
+      line-height: 1.5;
+    }
+
+    /* Section */
+    .section {
+      margin-bottom: 48px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 22px;
+      font-weight: 400;
+      color: var(--ink);
+    }
+
+    .section-tag {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--ink-muted);
+    }
+
+    /* FAQ */
+    .faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .faq-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    .faq-question {
+      width: 100%;
+      background: none;
+      border: none;
+      padding: 16px 20px;
+      text-align: left;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--ink);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      transition: background 0.15s;
+    }
+
+    .faq-question:hover { background: var(--bg); }
+
+    .faq-question .chevron {
+      font-size: 11px;
+      color: var(--ink-muted);
+      transition: transform 0.2s;
+      flex-shrink: 0;
+    }
+
+    .faq-item.open .chevron { transform: rotate(180deg); }
+
+    .faq-answer {
+      display: none;
+      padding: 0 20px 18px;
+      font-size: 13.5px;
+      line-height: 1.65;
+      color: var(--ink-muted);
+      border-top: 1px solid var(--border);
+      padding-top: 14px;
+    }
+
+    .faq-item.open .faq-answer { display: block; }
+
+    /* Info table */
+    .info-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      font-size: 13.5px;
+    }
+
+    .info-table th {
+      text-align: left;
+      padding: 12px 20px;
+      background: var(--bg);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--ink-muted);
+      border-bottom: 1px solid var(--border);
+      font-weight: 500;
+    }
+
+    .info-table td {
+      padding: 13px 20px;
+      border-bottom: 1px solid var(--border);
+      color: var(--ink);
+      line-height: 1.5;
+    }
+
+    .info-table tr:last-child td { border-bottom: none; }
+    .info-table td:first-child { font-weight: 500; width: 220px; color: var(--ink); }
+
+    /* Contact cards */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+
+    .contact-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 20px 22px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .contact-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--accent-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+
+    .contact-info h4 { font-size: 14px; font-weight: 600; margin-bottom: 2px; }
+    .contact-info .role { font-size: 12px; color: var(--ink-muted); margin-bottom: 6px; }
+    .contact-info .contact-detail { font-size: 12.5px; color: var(--accent); }
+
+    /* Alert */
+    .alert {
+      background: var(--accent-light);
+      border: 1px solid #e8c4bb;
+      border-radius: 8px;
+      padding: 16px 20px;
+      font-size: 13.5px;
+      color: var(--ink);
+      margin-bottom: 32px;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+
+    .alert-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+    .alert strong { font-weight: 600; }
+  </style>
+</head>
+<body>
+
+  <nav class="sidebar">
+    <div class="sidebar-logo">
+      <div class="company">Contoso</div>
+      <div class="tagline">Medarbetarportal</div>
+    </div>
+    <div class="sidebar-nav">
+      <div class="nav-section-label">Översikt</div>
+      <a href="#" class="nav-link active">Startsida</a>
+      <a href="#" class="nav-link">Nyheter</a>
+      <a href="#" class="nav-link">Organisationsschema</a>
+
+      <div class="nav-section-label">HR & Förmåner</div>
+      <a href="#" class="nav-link">Semester & ledighet</a>
+      <a href="#" class="nav-link">Förmåner</a>
+      <a href="#" class="nav-link">Lön & utlägg</a>
+
+      <div class="nav-section-label">IT & Support</div>
+      <a href="#" class="nav-link">IT-support</a>
+      <a href="#" class="nav-link">Verktyg & system</a>
+      <a href="#" class="nav-link">Säkerhetspolicy</a>
+    </div>
+    <div class="sidebar-footer">
+      Contoso AB · Intern portal<br>
+      Uppdaterad mars 2025
+    </div>
+  </nav>
+
+  <main class="main">
+    <div class="page-header">
+      <div class="breadcrumb">Medarbetarportal</div>
+      <h1>Välkommen till Contoso</h1>
+      <p class="page-intro">Här hittar du allt du behöver som medarbetare — från HR-frågor och förmåner till IT-support och policyer.</p>
+    </div>
+
+    <div class="alert">
+      <span class="alert-icon">📢</span>
+      <div><strong>Nyhet:</strong> Från och med 1 april 2025 hanteras alla utläggsrapporter via det nya systemet Contoso Expense. Kontakta ekonomi@contoso.se vid frågor.</div>
+    </div>
+
+    <div class="cards-grid">
+      <div class="card">
+        <div class="card-icon">🏖️</div>
+        <h3>Semester & ledighet</h3>
+        <p>Regler, ansökan och saldoöversikt för semester och övrig ledighet.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">💻</div>
+        <h3>IT-support</h3>
+        <p>Anmäl ärenden, byt lösenord och beställ utrustning via IT-portalen.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">💰</div>
+        <h3>Lön & utlägg</h3>
+        <p>Löneutbetalningar, utläggshantering och lönespecifikationer.</p>
+      </div>
+    </div>
+
+    <!-- FAQ: HR -->
+    <div class="section">
+      <div class="section-header">
+        <h2>Vanliga HR-frågor</h2>
+        <span class="section-tag">HR & Förmåner</span>
+      </div>
+      <div class="faq-list">
+
+        <div class="faq-item">
+          <button class="faq-question">Hur många semesterdagar har jag per år? <span class="chevron">▼</span></button>
+          <div class="faq-answer">Alla tillsvidareanställda på Contoso har 30 semesterdagar per år. Semesteråret löper från 1 april till 31 mars. Semester ansöks via HR-portalen senast 4 veckor innan önskat datum. Semesterdagar som inte tas ut under semesteråret kan sparas i upp till 5 år.</div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">Hur ansöker jag om semester? <span class="chevron">▼</span></button>
+          <div class="faq-answer">Semester ansöks via HR-portalen på hr.contoso.se. Logga in med ditt Contoso-konto, välj "Ansök om ledighet" och välj datum. Din närmaste chef godkänner ansökan inom 5 arbetsdagar. Du får en bekräftelse via e-post när ansökan är behandlad.</div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">Vilka förmåner erbjuder Contoso? <span class="chevron">▼</span></button>
+          <div class="faq-answer">Contoso erbjuder följande förmåner: friskvårdsbidrag på 4 000 kr per år, tjänstepension enligt ITP-planen, sjukvårdsförsäkring via Bupa, subventionerad lunch i personalrestaurangen (max 60 kr/dag), samt möjlighet till förskottssemester efter 1 år.</div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">Hur hanterar jag friskvårdsbidraget? <span class="chevron">▼</span></button>
+          <div class="faq-answer">Friskvårdsbidraget på 4 000 kr per kalenderår söks via HR-portalen. Spara kvitton och ladda upp dem under "Friskvård & utlägg". Bidraget täcker gym, träning, massage och liknande aktiviteter som klassas som friskvård enligt Skatteverkets regler. Utbetalning sker på nästa lön efter godkänd ansökan.</div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">Vad gäller vid sjukdom? <span class="chevron">▼</span></button>
+          <div class="faq-answer">Vid sjukdom ska du anmäla frånvaro till din chef senast kl 09.00 samma dag. Dag 1 är karensdag. Från dag 2–14 betalar Contoso sjuklön på 80 % av din lön. Från dag 15 tar Försäkringskassan över. Vid sjukdom längre än 7 dagar krävs läkarintyg. Sjukanmälan görs via HR-portalen eller direkt till din chef.</div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">Hur fungerar löneprocessen? <span class="chevron">▼</span></button>
+          <div class="faq-answer">Lön betalas ut den 25:e varje månad. Lönespecifikationer finns tillgängliga i HR-portalen från den 20:e. Lönerevision sker en gång per år, vanligtvis i april. Vid frågor om lön kontakta lön@contoso.se. Utlägg ersätts löpande och betalas ut på nästkommande lön efter godkänd rapport.</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- FAQ: IT -->
+    <div class="section">
+      <div class="section-header">
+        <h2>Vanliga IT-frågor</h2>
+        <span class="section-tag">IT & Support</span>
+      </div>
+      <div class="faq-list">
+
+        <div class="faq-item">
+          <button class="faq-question">Hur anmäler jag ett IT-ärende? <span class="chevron">▼</span></button>
+          <div class="faq-answer">IT-ärenden anmäls via IT-portalen på it.contoso.se eller via e-post till support@contoso.se. Ange alltid ditt namn, avdelning och en tydlig beskrivning av problemet. Brådskande ärenden kan ringas in på IT-supporten: 08-123 456 78, vardagar 08.00–17.00. Svarstid för vanliga ärenden är 1–2 arbetsdagar.</div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">Hur byter jag lösenord? <span class="chevron">▼</span></button>
+          <div class="faq-answer">Lösenord byts via Contosos självbetjäningsportal på password.contoso.se. Lösenord måste vara minst 12 tecken och innehålla stora och små bokstäver, siffror samt specialtecken. Lösenord uppdateras var 90:e dag. Har du glömt ditt lösenord, kontakta IT-supporten för återställning.</div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">Hur beställer jag ny utrustning? <span class="chevron">▼</span></button>
+          <div class="faq-answer">Utrustning beställs via IT-portalen under "Beställ utrustning". Standardutrustning (laptop, headset, mus, tangentbord) godkänns automatiskt. Annan utrustning kräver godkännande av närmaste chef och IT-chef. Leveranstid är normalt 5–10 arbetsdagar. Alla beställningar loggas och kopplas till din profil.</div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">Vilka system och verktyg används på Contoso? <span class="chevron">▼</span></button>
+          <div class="faq-answer">Contoso använder Microsoft 365 för e-post, Teams och dokumenthantering. Projekthantering sker i Planner och SharePoint. Ekonomisystemet är SAP och HR-systemet är Workday. Alla system nås via Contosos intranät efter inloggning med ditt Contoso-konto. VPN krävs vid arbete utanför kontoret.</div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">Vad gäller för distansarbete och VPN? <span class="chevron">▼</span></button>
+          <div class="faq-answer">Medarbetare kan arbeta på distans upp till 3 dagar per vecka efter överenskommelse med chef. VPN installeras av IT vid datoruppsättning. Anslut alltid via VPN när du arbetar hemifrån och behöver komma åt interna system. VPN-klient laddas ned från it.contoso.se. Kontakta IT-support om du har problem med anslutningen.</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Kontakter -->
+    <div class="section">
+      <div class="section-header">
+        <h2>Viktiga kontakter</h2>
+        <span class="section-tag">Support</span>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-card">
+          <div class="contact-avatar">👩‍💼</div>
+          <div class="contact-info">
+            <h4>Anna Lindström</h4>
+            <div class="role">HR-chef</div>
+            <div class="contact-detail">hr@contoso.se · 08-123 456 70</div>
+          </div>
+        </div>
+        <div class="contact-card">
+          <div class="contact-avatar">👨‍💻</div>
+          <div class="contact-info">
+            <h4>IT-supporten</h4>
+            <div class="role">Teknisk support</div>
+            <div class="contact-detail">support@contoso.se · 08-123 456 78</div>
+          </div>
+        </div>
+        <div class="contact-card">
+          <div class="contact-avatar">💰</div>
+          <div class="contact-info">
+            <h4>Ekonomiavdelningen</h4>
+            <div class="role">Lön & utlägg</div>
+            <div class="contact-detail">lön@contoso.se · 08-123 456 75</div>
+          </div>
+        </div>
+        <div class="contact-card">
+          <div class="contact-avatar">🏢</div>
+          <div class="contact-info">
+            <h4>Receptionen</h4>
+            <div class="role">Besök & lokaler</div>
+            <div class="contact-detail">reception@contoso.se · 08-123 456 00</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Snabbfakta -->
+    <div class="section">
+      <div class="section-header">
+        <h2>Snabbfakta om Contoso</h2>
+        <span class="section-tag">Om oss</span>
+      </div>
+      <table class="info-table">
+        <thead>
+          <tr><th>Uppgift</th><th>Information</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Företag</td><td>Contoso AB, org.nr 556123-4567</td></tr>
+          <tr><td>Huvudkontor</td><td>Kungsgatan 12, 111 43 Stockholm</td></tr>
+          <tr><td>Antal anställda</td><td>cirka 850 medarbetare i Sverige</td></tr>
+          <tr><td>Bransch</td><td>Teknik & konsulttjänster</td></tr>
+          <tr><td>Arbetstid</td><td>Flexibel arbetstid, kärntid 09.00–15.00</td></tr>
+          <tr><td>Semesterdagar</td><td>30 dagar per år</td></tr>
+          <tr><td>Löneutbetalning</td><td>Den 25:e varje månad</td></tr>
+          <tr><td>Friskvårdsbidrag</td><td>4 000 kr per kalenderår</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+  </main>
+
+  <script>
+    document.querySelectorAll('.faq-question').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.closest('.faq-item');
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+        if (!isOpen) item.classList.add('open');
+      });
+    });
+  </script>
+
+</body>
+</html>
