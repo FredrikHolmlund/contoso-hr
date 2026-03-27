@@ -3,11 +3,28 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Contoso – Medarbetarportal</title>
-  <meta name="description" content="Contoso AB:s medarbetarportal – hitta information om HR, semester, förmåner, lön, IT-support och interna verktyg för anställda." />
+  <title>Demoföretag – Medarbetarportal (UI-demo)</title>
+  <meta name="description" content="UI-demo och portföljprojekt av Fredrik Holmlund. Visar en fiktiv intern medarbetarportal för det påhittade företaget Demoföretag AB." />
   <meta name="robots" content="index, follow" />
+  <meta name="bingbot" content="index, follow" />
   <meta name="language" content="sv" />
   <link rel="canonical" href="https://fredrikholmlund.github.io/contoso-hr/" />
+  <link rel="sitemap" type="application/xml" href="/contoso-hr/sitemap.xml" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Demoföretag – Medarbetarportal (UI-demo)",
+    "description": "UI-demo och portföljprojekt av Fredrik Holmlund — en fiktiv intern medarbetarportal.",
+    "url": "https://fredrikholmlund.github.io/contoso-hr/",
+    "author": {
+      "@type": "Person",
+      "name": "Fredrik Holmlund",
+      "url": "https://fredrikholmlund.github.io"
+    },
+    "inLanguage": "sv"
+  }
+  </script>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300&family=DM+Serif+Display&display=swap" rel="stylesheet" />
   <style>
     :root {
@@ -30,7 +47,11 @@
       background: var(--bg);
       color: var(--ink);
       min-height: 100vh;
+    }
+
+    .app-layout {
       display: flex;
+      min-height: calc(100vh - 37px);
     }
 
     /* Sidebar */
@@ -40,7 +61,7 @@
       background: var(--sidebar);
       padding: 32px 0;
       position: fixed;
-      top: 0; left: 0;
+      top: 37px; left: 0;
       display: flex;
       flex-direction: column;
     }
@@ -349,13 +370,30 @@
 
     .alert-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
     .alert strong { font-weight: 600; }
+
+    /* Demo banner */
+    .demo-banner {
+      background: #1e1e1c;
+      color: #e8e6e0;
+      text-align: center;
+      font-size: 12px;
+      padding: 8px 16px;
+      letter-spacing: 0.4px;
+    }
+    .demo-banner a { color: #c84b2f; text-decoration: none; }
+    .demo-banner a:hover { text-decoration: underline; }
   </style>
 </head>
 <body>
 
+  <div class="demo-banner">
+    Detta är ett <strong>UI-demo och portföljprojekt</strong> av <a href="https://fredrikholmlund.github.io" target="_blank">Fredrik Holmlund</a>. Demoföretag är ett fiktivt företag — all information är påhittad.
+  </div>
+
+  <div class="app-layout">
   <nav class="sidebar">
     <div class="sidebar-logo">
-      <div class="company">Contoso</div>
+      <div class="company">Demoföretag</div>
       <div class="tagline">Medarbetarportal</div>
     </div>
     <div class="sidebar-nav">
@@ -375,21 +413,21 @@
       <a href="#" class="nav-link">Säkerhetspolicy</a>
     </div>
     <div class="sidebar-footer">
-      Contoso AB · Intern portal<br>
-      Uppdaterad mars 2025
+      Demoföretag AB · Fiktivt företag<br>
+      UI-demo av Fredrik Holmlund
     </div>
   </nav>
 
   <main class="main">
     <div class="page-header">
       <div class="breadcrumb">Medarbetarportal</div>
-      <h1>Välkommen till Contoso</h1>
+      <h1>Välkommen till Demoföretag</h1>
       <p class="page-intro">Här hittar du allt du behöver som medarbetare — från HR-frågor och förmåner till IT-support och policyer.</p>
     </div>
 
     <div class="alert">
       <span class="alert-icon">📢</span>
-      <div><strong>Nyhet:</strong> Från och med 1 april 2025 hanteras alla utläggsrapporter via det nya systemet Contoso Expense. Kontakta <a href="mailto:ekonomi@contoso.se">ekonomi@contoso.se</a> vid frågor.</div>
+      <div><strong>Nyhet:</strong> Från och med 1 april 2025 hanteras alla utläggsrapporter via det nya systemet Demoföretag Expense. Kontakta <a href="mailto:ekonomi@demoforetag.se">ekonomi@demoforetag.se</a> vid frågor.</div>
     </div>
 
     <div class="cards-grid">
@@ -420,17 +458,17 @@
 
         <div class="faq-item">
           <button class="faq-question">Hur många semesterdagar har jag per år? <span class="chevron">▼</span></button>
-          <div class="faq-answer">Alla tillsvidareanställda på Contoso har 30 semesterdagar per år. Semesteråret löper från 1 april till 31 mars. Semester ansöks via HR-portalen senast 4 veckor innan önskat datum. Semesterdagar som inte tas ut under semesteråret kan sparas i upp till 5 år.</div>
+          <div class="faq-answer">Alla tillsvidareanställda på Demoföretag har 30 semesterdagar per år. Semesteråret löper från 1 april till 31 mars. Semester ansöks via HR-portalen senast 4 veckor innan önskat datum. Semesterdagar som inte tas ut under semesteråret kan sparas i upp till 5 år.</div>
         </div>
 
         <div class="faq-item">
           <button class="faq-question">Hur ansöker jag om semester? <span class="chevron">▼</span></button>
-          <div class="faq-answer">Semester ansöks via HR-portalen på hr.contoso.se. Logga in med ditt Contoso-konto, välj "Ansök om ledighet" och välj datum. Din närmaste chef godkänner ansökan inom 5 arbetsdagar. Du får en bekräftelse via e-post när ansökan är behandlad.</div>
+          <div class="faq-answer">Semester ansöks via HR-portalen på hr.demoforetag.se. Logga in med ditt Demoföretag-konto, välj "Ansök om ledighet" och välj datum. Din närmaste chef godkänner ansökan inom 5 arbetsdagar. Du får en bekräftelse via e-post när ansökan är behandlad.</div>
         </div>
 
         <div class="faq-item">
-          <button class="faq-question">Vilka förmåner erbjuder Contoso? <span class="chevron">▼</span></button>
-          <div class="faq-answer">Contoso erbjuder följande förmåner: friskvårdsbidrag på 4 000 kr per år, tjänstepension enligt ITP-planen, sjukvårdsförsäkring via Bupa, subventionerad lunch i personalrestaurangen (max 60 kr/dag), samt möjlighet till förskottssemester efter 1 år.</div>
+          <button class="faq-question">Vilka förmåner erbjuder Demoföretag? <span class="chevron">▼</span></button>
+          <div class="faq-answer">Demoföretag erbjuder följande förmåner: friskvårdsbidrag på 4 000 kr per år, tjänstepension enligt ITP-planen, sjukvårdsförsäkring via Bupa, subventionerad lunch i personalrestaurangen (max 60 kr/dag), samt möjlighet till förskottssemester efter 1 år.</div>
         </div>
 
         <div class="faq-item">
@@ -440,12 +478,12 @@
 
         <div class="faq-item">
           <button class="faq-question">Vad gäller vid sjukdom? <span class="chevron">▼</span></button>
-          <div class="faq-answer">Vid sjukdom ska du anmäla frånvaro till din chef senast kl 09.00 samma dag. Dag 1 är karensdag. Från dag 2–14 betalar Contoso sjuklön på 80 % av din lön. Från dag 15 tar Försäkringskassan över. Vid sjukdom längre än 7 dagar krävs läkarintyg. Sjukanmälan görs via HR-portalen eller direkt till din chef.</div>
+          <div class="faq-answer">Vid sjukdom ska du anmäla frånvaro till din chef senast kl 09.00 samma dag. Dag 1 är karensdag. Från dag 2–14 betalar Demoföretag sjuklön på 80 % av din lön. Från dag 15 tar Försäkringskassan över. Vid sjukdom längre än 7 dagar krävs läkarintyg. Sjukanmälan görs via HR-portalen eller direkt till din chef.</div>
         </div>
 
         <div class="faq-item">
           <button class="faq-question">Hur fungerar löneprocessen? <span class="chevron">▼</span></button>
-          <div class="faq-answer">Lön betalas ut den 25:e varje månad. Lönespecifikationer finns tillgängliga i HR-portalen från den 20:e. Lönerevision sker en gång per år, vanligtvis i april. Vid frågor om lön kontakta <a href="mailto:lon@contoso.se">lon@contoso.se</a>. Utlägg ersätts löpande och betalas ut på nästkommande lön efter godkänd rapport.</div>
+          <div class="faq-answer">Lön betalas ut den 25:e varje månad. Lönespecifikationer finns tillgängliga i HR-portalen från den 20:e. Lönerevision sker en gång per år, vanligtvis i april. Vid frågor om lön kontakta <a href="mailto:lon@demoforetag.se">lon@demoforetag.se</a>. Utlägg ersätts löpande och betalas ut på nästkommande lön efter godkänd rapport.</div>
         </div>
 
       </div>
@@ -461,12 +499,12 @@
 
         <div class="faq-item">
           <button class="faq-question">Hur anmäler jag ett IT-ärende? <span class="chevron">▼</span></button>
-          <div class="faq-answer">IT-ärenden anmäls via IT-portalen på it.contoso.se eller via e-post till <a href="mailto:support@contoso.se">support@contoso.se</a>. Ange alltid ditt namn, avdelning och en tydlig beskrivning av problemet. Brådskande ärenden kan ringas in på IT-supporten: 08-123 456 78, vardagar 08.00–17.00. Svarstid för vanliga ärenden är 1–2 arbetsdagar.</div>
+          <div class="faq-answer">IT-ärenden anmäls via IT-portalen på it.demoforetag.se eller via e-post till <a href="mailto:support@demoforetag.se">support@demoforetag.se</a>. Ange alltid ditt namn, avdelning och en tydlig beskrivning av problemet. Brådskande ärenden kan ringas in på IT-supporten: 08-123 456 78, vardagar 08.00–17.00. Svarstid för vanliga ärenden är 1–2 arbetsdagar.</div>
         </div>
 
         <div class="faq-item">
           <button class="faq-question">Hur byter jag lösenord? <span class="chevron">▼</span></button>
-          <div class="faq-answer">Lösenord byts via Contosos självbetjäningsportal på password.contoso.se. Lösenord måste vara minst 12 tecken och innehålla stora och små bokstäver, siffror samt specialtecken. Lösenord uppdateras var 90:e dag. Har du glömt ditt lösenord, kontakta IT-supporten för återställning.</div>
+          <div class="faq-answer">Lösenord byts via Demoföretags självbetjäningsportal på password.demoforetag.se. Lösenord måste vara minst 12 tecken och innehålla stora och små bokstäver, siffror samt specialtecken. Lösenord uppdateras var 90:e dag. Har du glömt ditt lösenord, kontakta IT-supporten för återställning.</div>
         </div>
 
         <div class="faq-item">
@@ -475,13 +513,13 @@
         </div>
 
         <div class="faq-item">
-          <button class="faq-question">Vilka system och verktyg används på Contoso? <span class="chevron">▼</span></button>
-          <div class="faq-answer">Contoso använder Microsoft 365 för e-post, Teams och dokumenthantering. Projekthantering sker i Planner och SharePoint. Ekonomisystemet är SAP och HR-systemet är Workday. Alla system nås via Contosos intranät efter inloggning med ditt Contoso-konto. VPN krävs vid arbete utanför kontoret.</div>
+          <button class="faq-question">Vilka system och verktyg används på Demoföretag? <span class="chevron">▼</span></button>
+          <div class="faq-answer">Demoföretag använder Microsoft 365 för e-post, Teams och dokumenthantering. Projekthantering sker i Planner och SharePoint. Ekonomisystemet är SAP och HR-systemet är Workday. Alla system nås via Demoföretags intranät efter inloggning med ditt Demoföretag-konto. VPN krävs vid arbete utanför kontoret.</div>
         </div>
 
         <div class="faq-item">
           <button class="faq-question">Vad gäller för distansarbete och VPN? <span class="chevron">▼</span></button>
-          <div class="faq-answer">Medarbetare kan arbeta på distans upp till 3 dagar per vecka efter överenskommelse med chef. VPN installeras av IT vid datoruppsättning. Anslut alltid via VPN när du arbetar hemifrån och behöver komma åt interna system. VPN-klient laddas ned från it.contoso.se. Kontakta IT-support om du har problem med anslutningen.</div>
+          <div class="faq-answer">Medarbetare kan arbeta på distans upp till 3 dagar per vecka efter överenskommelse med chef. VPN installeras av IT vid datoruppsättning. Anslut alltid via VPN när du arbetar hemifrån och behöver komma åt interna system. VPN-klient laddas ned från it.demoforetag.se. Kontakta IT-support om du har problem med anslutningen.</div>
         </div>
 
       </div>
@@ -499,7 +537,7 @@
           <div class="contact-info">
             <h4>Anna Lindström</h4>
             <div class="role">HR-chef</div>
-            <div class="contact-detail"><a href="mailto:hr@contoso.se">hr@contoso.se</a> · 08-123 456 70</div>
+            <div class="contact-detail"><a href="mailto:hr@demoforetag.se">hr@demoforetag.se</a> · 08-123 456 70</div>
           </div>
         </div>
         <div class="contact-card">
@@ -507,7 +545,7 @@
           <div class="contact-info">
             <h4>IT-supporten</h4>
             <div class="role">Teknisk support</div>
-            <div class="contact-detail"><a href="mailto:support@contoso.se">support@contoso.se</a> · 08-123 456 78</div>
+            <div class="contact-detail"><a href="mailto:support@demoforetag.se">support@demoforetag.se</a> · 08-123 456 78</div>
           </div>
         </div>
         <div class="contact-card">
@@ -515,7 +553,7 @@
           <div class="contact-info">
             <h4>Ekonomiavdelningen</h4>
             <div class="role">Lön & utlägg</div>
-            <div class="contact-detail"><a href="mailto:lon@contoso.se">lon@contoso.se</a> · 08-123 456 75</div>
+            <div class="contact-detail"><a href="mailto:lon@demoforetag.se">lon@demoforetag.se</a> · 08-123 456 75</div>
           </div>
         </div>
         <div class="contact-card">
@@ -523,7 +561,7 @@
           <div class="contact-info">
             <h4>Receptionen</h4>
             <div class="role">Besök & lokaler</div>
-            <div class="contact-detail"><a href="mailto:reception@contoso.se">reception@contoso.se</a> · 08-123 456 00</div>
+            <div class="contact-detail"><a href="mailto:reception@demoforetag.se">reception@demoforetag.se</a> · 08-123 456 00</div>
           </div>
         </div>
       </div>
@@ -532,7 +570,7 @@
     <!-- Snabbfakta -->
     <div class="section">
       <div class="section-header">
-        <h2>Snabbfakta om Contoso</h2>
+        <h2>Snabbfakta om Demoföretag</h2>
         <span class="section-tag">Om oss</span>
       </div>
       <table class="info-table">
@@ -540,7 +578,7 @@
           <tr><th>Uppgift</th><th>Information</th></tr>
         </thead>
         <tbody>
-          <tr><td>Företag</td><td>Contoso AB, org.nr 556123-4567</td></tr>
+          <tr><td>Företag</td><td>Demoföretag AB (fiktivt företag)</td></tr>
           <tr><td>Huvudkontor</td><td>Kungsgatan 12, 111 43 Stockholm</td></tr>
           <tr><td>Antal anställda</td><td>cirka 850 medarbetare i Sverige</td></tr>
           <tr><td>Bransch</td><td>Teknik & konsulttjänster</td></tr>
@@ -553,6 +591,7 @@
     </div>
 
   </main>
+  </div>
 </div>
 
 <script>

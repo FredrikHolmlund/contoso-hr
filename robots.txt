@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://fredrikholmlund.github.io/contoso-hr/sitemap.xml
